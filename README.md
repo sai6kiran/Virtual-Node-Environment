@@ -45,7 +45,7 @@ Runnning this command will provide you the list of docker images on your local m
 
 
 # Creaing the Docker Container
-The following section will describe how to create your conatiner(s) to run the coresense plugin virtually, when a coresense board is conected to you local machine.
+The following section will describe a sample example of how to create your container(s) to run the coresense plugin virtually, when a coresense board is conected to you local machine.
 
 The following information presented below is an instance of how to use this tool in a certain way. This tool can be used to preform other actions, a node would preform, virtually.
 
@@ -79,7 +79,7 @@ This section will explain how you can intialize your image to run as a single co
  
 ***Run the following command to initialize your single container:***
 
-    `docker run -it -v /etc/ssl/:/usr/lib/waggle/SSL -v /var/run/docker.sock:/var/run/docker.sock -v ~/Virtual-Node-Environment/plugin.py:/usr/lib/waggle/plugin_manager/plugins/coresense_3/plugin.py -t -i --device=/dev/waggle_coresense0:/dev/waggle_coresense0 -t -i --device=/dev/waggle_coresense1:/dev/waggle_coresense1 --workdir /usr/lib/waggle/plugin_manager/plugins/coresense_3 sai6kiran/waggle-vne-image:2.6.0-pre1 ./plugin.py "hello world"`
+    `docker run -it -v /etc/ssl/:/usr/lib/waggle/SSL -v /var/run/docker.sock:/var/run/docker.sock -v ~/Virtual-Node-Environment/plugin.py:/usr/lib/waggle/plugin_manager/plugins/coresense_3/plugin.py -t -i --device=/dev/waggle_coresense0:/dev/waggle_coresense0 -t -i --device=/dev/waggle_coresense1:/dev/waggle_coresense1 --workdir /usr/lib/waggle/plugin_manager/plugins/coresense_3 sai6kiran/waggle-vne-image:2.6.0-pre1`
      
  This will direct you inside the container, and now you can run your sotfware through a node virtually.
  
@@ -87,6 +87,7 @@ This section will explain how you can intialize your image to run as a single co
  
     `docker run -it -v /etc/ssl/:/usr/lib/waggle/SSL -v /var/run/docker.sock:/var/run/docker.sock -v ~/Virtual-Node-Environment/plugin.py:/usr/lib/waggle/plugin_manager/plugins/coresense_3/plugin.py -t -i --device=/dev/waggle_coresense0:/dev/waggle_coresense0 -t -i --device=/dev/waggle_coresense1:/dev/waggle_coresense1 --workdir /usr/lib/waggle/plugin_manager/plugins/coresense_3 sai6kiran/waggle-vne-image:2.6.0-pre1 ./plugin.py "hello world"`
     
+This will run your coresense plugin, inside your container, in the background of your computer.
  
  ### 2. Running it as a swarm of containers:
  
@@ -135,6 +136,7 @@ This section will explain how you can intialize your image to run multiple conta
  
     `docker service create --replicas (n) --name waggle-service --with-registry-auth --mount type=bind,src="/etc/ssl",dst="/usr/lib/waggle/SSL/" --mount type=bind,src="~/Virtual-Node-Environment/plugin.py",dst="/usr/lib/waggle/plugin_manager/plugins/coresense_3/plugin.py" --mount type=bind,src="/dev/waggle_coresense0",dst="/dev/waggle_coresense0" --mount type=bind,src="/dev/waggle_coresense1",dst="/dev/waggle_coresense1" --mount type=bind,src="/var/run/docker.sock",dst="/var/run/docker.sock" --workdir /usr/lib/waggle/plugin_manager/plugins/coresense_3/ sai6kiran/waggle-vne-image:2.6.0-pre1 ./plugin.py "hello world"`
  
+  * Replace "(n)" with a number for the number of containers you wish deploy at once.
  
 ***Run the following command immediately after running your service of swarms:***
 
