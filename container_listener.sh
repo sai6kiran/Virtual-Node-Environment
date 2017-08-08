@@ -8,7 +8,7 @@ do
 	exit
     fi
     
-    USBDEV=( $(`readlink -f /dev/waggle_coresense[0-9]*`) )
+    USBDEV=( $(readlink -f /dev/waggle_coresense[0-9]*) )
     for j in "${USBDEV[@]}"
     do
 	read minor major < <(stat -c '%T %t' $j)
